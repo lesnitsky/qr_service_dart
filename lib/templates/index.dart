@@ -55,10 +55,23 @@ const _tmpl = '''
     <h1>QR code generator</h1>
     <form action="/generate" method="post">
       <input type="text" name="data" id="data" placeholder="QR Code content" />
-      <button type="submit">Generate</button>
+      <button type="submit" disabled>Generate</button>
     </form>
 
     <footer>Powered by <a href="https://globe.dev/">Globe.dev</a></footer>
+
+    <script>
+      const dataInput = document.getElementById('data');
+      const submitButton = document.querySelector('button[type="submit"]');
+
+      dataInput.addEventListener('input', () => {
+        if (dataInput.value) {
+          submitButton.removeAttribute('disabled');
+        } else {
+          submitButton.setAttribute('disabled', true);
+        }
+      });
+    </script>
   </body>
 </html>
 ''';
